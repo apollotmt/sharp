@@ -1,0 +1,123 @@
+<script>
+  $(document).ready(function () {
+
+    const whiteUrlArray = [
+      "https://seguro.vegaz.com.br/checkout/3059407027/12",
+      "https://seguro.vegaz.com.br/checkout/3059612758/12",
+      "https://seguro.vegaz.com.br/checkout/3059592448/12",
+      "https://seguro.vegaz.com.br/checkout/3059137848/12",
+      "https://seguro.vegaz.com.br/checkout/3059974091/12",
+      "https://seguro.vegaz.com.br/checkout/3059975858/12",
+      "https://seguro.vegaz.com.br/checkout/3059296750/12",
+      "https://seguro.vegaz.com.br/checkout/3059447106/12",
+      "https://seguro.vegaz.com.br/checkout/3059577308/12",
+      "https://seguro.vegaz.com.br/checkout/3059273965/12",
+    ];
+
+    const blackUrlArray = [
+      "https://seguro.vegaz.com.br/checkout/3059846422/12",
+      "https://seguro.vegaz.com.br/checkout/3059443782/12",
+      "https://seguro.vegaz.com.br/checkout/3059582894/12",
+      "https://seguro.vegaz.com.br/checkout/3059291066/12",
+      "https://seguro.vegaz.com.br/checkout/3059471015/12",
+      "https://seguro.vegaz.com.br/checkout/3059485452/12",
+      "https://seguro.vegaz.com.br/checkout/3059868814/12",
+      "https://seguro.vegaz.com.br/checkout/3059102073/12",
+      "https://seguro.vegaz.com.br/checkout/3059263750/12",
+      "https://seguro.vegaz.com.br/checkout/3059412670/12",
+    ];
+
+    const baseValueOld = 152;
+    const baseValuePromo = 117;
+
+    updateOfferBlack(1)
+    updateOfferWhite(1)
+
+    //white
+    $('.white-plus').click(function (e) {
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      const quantity = parseInt($('#quantity-white').val());
+      // If is not undefined
+      if (quantity >= whiteUrlArray.length) {
+        return;
+      }
+      const newValue = quantity + 1;
+      $('#quantity-white').val(newValue);
+      updateOfferWhite(newValue);
+      // Increment
+    });
+
+    $('.white-minus').click(function (e) {
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity-white').val());
+      // If is not undefined
+      // Increment
+      if (quantity > 1) {
+        const newValue = quantity - 1;
+        $('#quantity-white').val(newValue);
+        updateOfferWhite(newValue);
+      }
+    });
+
+    //black
+    $('.black-plus').click(function (e) {
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity-black').val());
+      // If is not undefined
+      if (quantity >= blackUrlArray.length) {
+        return;
+      }
+      const newValue = quantity + 1;
+      $('#quantity-black').val(newValue);
+      updateOfferBlack(newValue);
+      // Increment
+    });
+
+    $('.black-minus').click(function (e) {
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity-black').val());
+      // If is not undefined
+      // Increment
+      if (quantity > 1) {
+        const newValue = quantity - 1;
+        $('#quantity-black').val(newValue);
+        updateOfferBlack(newValue);
+      }
+    });
+
+    function updateOfferBlack(qty){
+      const href = blackUrlArray[qty-1]
+      updateBlackButton(href);
+      const priceOld = qty * baseValueOld;
+      const pricePromo = qty * baseValuePromo;
+      $('#price-black-old').text(priceOld);
+      $('#price-black-promo').text(pricePromo);
+    }
+
+    function updateOfferWhite(qty){
+      const href = whiteUrlArray[qty-1]
+      updateWhiteButton(href);
+      const priceOld = qty * baseValueOld;
+      const pricePromo = qty * baseValuePromo;
+      $('#price-white-old').text(priceOld);
+      $('#price-white-promo').text(pricePromo);
+    }
+
+    function updateBlackButton(href){
+      $('#buy-black').attr('href', href);
+    }
+
+    function updateWhiteButton(href){
+      $('#buy-white').attr('href', href);
+    }
+
+  });
+</script>
